@@ -28,6 +28,8 @@
   <%= image_tag @magazine.cover.url(:medium)%>
   <%= image_tag @magazine.cover.url(:thumb) %>
 </p>
+
+<%= button_to "Add pages" , :action => :add_pages, :id => @magazine %> 
   
 <%= link_to 'Edit', edit_magazine_path(@magazine) %> |
 <%= link_to 'Back', magazines_path %>

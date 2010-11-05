@@ -31,6 +31,15 @@ class MagazinesController < ApplicationController
       format.xml  { render :xml => @magazine }
     end
   end
+  
+  def add_pages
+    @magazine = Magazine.find(params[:id])
+    @magazine_page = MagazinePage.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @magazine }
+    end    
+  end 
 
   # GET /magazines/1/edit
   def edit
@@ -51,6 +60,19 @@ class MagazinesController < ApplicationController
         format.html { render :action => "new" }
         format.xml  { render :xml => @magazine.errors, :status => :unprocessable_entity }
       end
+    end
+  end
+  
+  def create_page
+    @magazine_page = MagazinePage.new(params[:magazine_page])
+    respond_to do |format|
+      if @magazine_page.save
+        format.html {redirect_to :action => "index" }
+        format.xml { render :xml => @magazine_page, :status => :created, :location => @magazine_page }
+      else
+        format.html {render :action => "add_pages"}
+        format.xml  {render :xml => @magazine.errors, :status => :unprocessable_entity}  
+      end  
     end
   end
 
