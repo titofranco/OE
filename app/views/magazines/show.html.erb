@@ -1,0 +1,33 @@
+<p>
+  <b>Title:</b>
+  <%=h @magazine.title %>
+</p>
+
+<p>
+  <b>Number of pages:</b>
+  <%=h @magazine.number_of_pages %>
+</p>
+
+<p>
+  <b>Publisher:</b>
+  <%=h @magazine.publisher %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <%=h @magazine.tags %>
+</p>
+
+<p>
+  <b>Release date:</b>
+  <%=h @magazine.release_date %>
+</p>
+  
+<p>
+  <b>Image:</b>
+  <%= image_tag @magazine.cover.url(:medium)%>
+  <%= image_tag @magazine.cover.url(:thumb) %>
+</p>
+  
+<%= link_to 'Edit', edit_magazine_path(@magazine) %> |
+<%= link_to 'Back', magazines_path %>
