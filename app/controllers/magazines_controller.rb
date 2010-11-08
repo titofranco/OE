@@ -1,6 +1,9 @@
 class MagazinesController < ApplicationController
   # GET /magazines
   # GET /magazines.xml
+  
+  layout "magazines"
+  
   def index
     @magazines = Magazine.all
 
@@ -104,4 +107,14 @@ class MagazinesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def show_magazine
+    @magazine_pages = MagazinePage.find_all_by_magazine_id(params[:id])
+    @magazine = Magazine.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @magazine }
+    end
+  end
+  
 end

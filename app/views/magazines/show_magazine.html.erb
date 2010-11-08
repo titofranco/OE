@@ -1,0 +1,7 @@
+<div id="myBook">
+<div class="imBookPage" style="background: url(<%= @magazine.cover.url %>"></div>  
+
+<% @magazine_pages.to_a.each do |magazine| -%>
+  <div class="imBookPage" style="background: url(<%= magazine.image.url %>"></div>  
+<% end-%>
+</div>
