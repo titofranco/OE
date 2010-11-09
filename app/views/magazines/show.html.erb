@@ -25,11 +25,29 @@
   
 <p>
   <b>Image:</b>
-  <%= image_tag @magazine.cover.url(:medium)%>
   <%= image_tag @magazine.cover.url(:thumb) %>
 </p>
 
-<%= button_to "Add pages" , :action => :add_pages, :id => @magazine %> 
+
+<h1>Lista de paginas</h1>
+
+<% unless @magazine.magazine_pages.empty?%>
+  <table>
+  <thead>
+  <tr>
+  <th> Page Number </th>
+  <th> Image </th>
+  <th> Actions </th>
+  </tr>
+  </thead>
+  <tbody>
+  <%=render :partial => "/magazine_pages/magazine_page", :collection => @magazine.magazine_pages %>
+  </tbody>
+  </table>
+<%end%>
+
+
+<%= link_to "Add pages" , new_magazine_page_url(:magazine_id => @magazine.id) %> 
   
 <%= link_to 'Edit', edit_magazine_path(@magazine) %> |
 <%= link_to 'Back', magazines_path %>

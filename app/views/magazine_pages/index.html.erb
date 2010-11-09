@@ -1,0 +1,26 @@
+<h1>Listing magazines_pages</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Cover</th>
+    <th>Page Number</th>
+    <th>Image</th>
+  </tr>
+
+<% @magazine_pages.each do |magazine_page| %>
+  <tr>
+    <td><%=h magazine_page.magazine.title %></td>
+    <td><%=image_tag magazine_page.magazine.cover.url(:thumb) %></td>
+    <td><%=h magazine_page.page_number %></td>
+    <td><%=image_tag magazine_page.image.url(:thumb) %></td>
+    <td><%= link_to 'Show', magazine_page %></td>
+    <td><%= link_to 'Edit', edit_magazine_page_path(magazine_page) %></td>
+    <td><%= link_to 'Destroy', magazine_page, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New magazine', new_magazine_page_path %>

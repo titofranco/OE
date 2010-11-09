@@ -1,0 +1,19 @@
+<h1>New magazine page</h1>
+
+<% form_for @magazine_page , :html => {:multipart => true}, :url => { :action => "create" , :magazine_id => @magazine.id} do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :page_number%><br />
+    <%= f.text_field :page_number %>
+  </p>
+  
+  <%= f.hidden_field :magazine_id, :value => @magazine.id %>
+  </p>
+   <%= f.file_field :image %>
+  <p>
+    <%= f.submit 'create' %>
+  </p>
+<% end %>
+
+
+
