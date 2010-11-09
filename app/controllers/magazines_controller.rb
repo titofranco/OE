@@ -1,9 +1,9 @@
 class MagazinesController < ApplicationController
-  # GET /magazines
-  # GET /magazines.xml
-  
+ 
   layout "magazines"
   
+   # GET /magazines
+  # GET /magazines.xml
   def index
     @magazines = Magazine.all
 
@@ -34,15 +34,6 @@ class MagazinesController < ApplicationController
       format.xml  { render :xml => @magazine }
     end
   end
-  
-  def add_pages
-    @magazine = Magazine.find(params[:id])
-    @magazine_page = MagazinePage.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @magazine }
-    end    
-  end 
 
   # GET /magazines/1/edit
   def edit
@@ -53,7 +44,6 @@ class MagazinesController < ApplicationController
   # POST /magazines.xml
   def create
     @magazine = Magazine.new(params[:magazine])
-
     respond_to do |format|
       if @magazine.save
         flash[:notice] = 'Magazine was successfully created.'
@@ -63,19 +53,6 @@ class MagazinesController < ApplicationController
         format.html { render :action => "new" }
         format.xml  { render :xml => @magazine.errors, :status => :unprocessable_entity }
       end
-    end
-  end
-  
-  def create_page
-    @magazine_page = MagazinePage.new(params[:magazine_page])
-    respond_to do |format|
-      if @magazine_page.save
-        format.html {redirect_to :action => "index" }
-        format.xml { render :xml => @magazine_page, :status => :created, :location => @magazine_page }
-      else
-        format.html {render :action => "add_pages"}
-        format.xml  {render :xml => @magazine.errors, :status => :unprocessable_entity}  
-      end  
     end
   end
 
@@ -105,15 +82,6 @@ class MagazinesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(magazines_url) }
       format.xml  { head :ok }
-    end
-  end
-  
-  def show_magazine
-    @magazine_pages = MagazinePage.find_all_by_magazine_id(params[:id])
-    @magazine = Magazine.find(params[:id])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @magazine }
     end
   end
   
