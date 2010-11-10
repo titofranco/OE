@@ -8,8 +8,8 @@
 #myBook {
 	display:none;
 	position:absolute;
-	left: 400px;
-	top:270px;
+	left: 100px;
+	top:0px;
 	width: 604px;
 	height:362px;
 }
@@ -17,8 +17,8 @@
 	position:absolute;
 	left:0px;
 	top:0px;
-	width: 300px;
-	height:360px;
+	width: 600px;
+	height:660px;
 	color:#fff;
 	overflow:hidden;
 	border: solid 1px #000;

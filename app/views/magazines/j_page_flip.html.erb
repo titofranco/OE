@@ -1,0 +1,11 @@
+<div id="pageBackground" style="position: absolute; z-index: 3; top: 1px; left: 25px; width:300px;">
+<img src="/images/book_background.png">
+</div>
+<div id="myPageFlip">
+
+<%=image_tag @magazine.cover.url(:medium), :class => "jPageFlip"%>
+
+<% @pages.to_a.each do |page| -%>
+  <%=image_tag page.image.url(:medium), :class => "jPageFlip" %>
+<% end-%>
+</div>

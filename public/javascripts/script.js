@@ -8,7 +8,16 @@ $(document).ready( function() {
 	$("#myBook").imBookFlip({
 		page_class: 'imBookPage'
 	});
-
+	
+	
+   $('#myPageFlip').jPageFlip({
+      width: 300,
+      height: 225,
+      top: 30,
+      left: 70
+    });
+	
 	
 });
+
 
