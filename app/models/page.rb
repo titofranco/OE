@@ -1,4 +1,4 @@
-class MagazinePage < ActiveRecord::Base
+class Page < ActiveRecord::Base
   belongs_to :magazine
   has_attached_file :image , 
                     :styles => { :medium => "300x300", :thumb => "100x100"},
