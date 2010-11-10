@@ -1,6 +1,6 @@
 <h1>Editing magazine page</h1>
 
-<% form_for @magazine_page, :url => {:action => :update, :magazine_id=>@magazine.id} ,:html => {:multipart => true} do |f| %>
+<% form_for @page, :url => {:action => :update, :magazine_id=>@magazine.id} ,:html => {:multipart => true} do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label :page_number%><br />

@@ -1,82 +1,81 @@
 class PagesController < ApplicationController
-  before_filter :find_magazine , :except => :destroy
+  before_filter :find_magazine , :except => [:destroy]
   layout "magazines"
   
- # GET /magazine_pages
-  # GET /magazine_pages.xm 
+ # GET /pages
+  # GET /pages.xm 
   def index
-    @magazine_pages = MagazinePage.all
+    @pages = Page.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @magazine_pages }
+      format.xml  { render :xml => @pages }
     end
   end
 
 
-  # GET /magazine_pages/new
-  # GET /magazine_pages/new.xml
+  # GET /pages/new
+  # GET /pages/new.xml
   def new
-    @magazine_page = MagazinePage.new
+    @page = Page.new
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @magazine_page }
+      format.xml  { render :xml => @page }
     end
   end
 
-  # GET /magazine_pages/1/edit
+  # GET /pages/1/edit
   def edit
-    @magazine_page = MagazinePage.find(params[:id])
+    @page = Page.find(params[:id])
   end
 
-  # POST /magazine_pages
-  # POST /magazine_pages.xml
+  # POST /pages
+  # POST /pages.xml
   def create
-    @magazine_page = MagazinePage.new(params[:magazine_page])
+    @page = Page.new(params[:page])
     respond_to do |format|
-      if @magazine_page.save!
-        flash[:notice] = 'MagazinePage was successfully created.'
+      if @page.save!
+        flash[:notice] = 'Page was successfully created.'
         format.html { redirect_to magazine_url (@magazine) }
-        format.xml  { render :xml => @magazine_page, :status => :created, :location => @magazine_page }
+        format.xml  { render :xml => @page, :status => :created, :location => @page }
       else
         format.html { render :action => "add_pages" }
-        format.xml  { render :xml => @magazine_page.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /magazine_pages/1
-  # PUT /magazine_pages/1.xml
+  # PUT /pages/1
+  # PUT /pages/1.xml
   def update
-    @magazine_page = MagazinePage.find(params[:id])
+    @page = Page.find(params[:id])
 
     respond_to do |format|
-      if @magazine_page.update_attributes(params[:magazine_page])
-        flash[:notice] = 'Magazine Page was successfully updated.'
+      if @page.update_attributes(params[:page])
+        flash[:notice] = 'Page was successfully updated.'
         format.html { redirect_to magazine_url (@magazine) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @magazine_page.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /magazine_pages/1
-  # DELETE /magazine_pages/1.xml
+  # DELETE /pages/1
+  # DELETE /pages/1.xml
   def destroy
-    @magazine_page = MagazinePage.find(params[:id])
-    @magazine_page.destroy
+    @page = Page.find(params[:id])
+    @page.destroy
 
     respond_to do |format|
-      format.html { redirect_to(magazines_url) }
+      format.html { redirect_to magazine_url(@page.magazine_id)}
       format.xml  { head :ok }
     end
   end
-
-
-  private
   
+
+  private 
   def find_magazine
     puts "recibi #{params[:magazine_id]}"
     @magazine_id = params[:magazine_id]

@@ -31,7 +31,7 @@
 
 <h1>Lista de paginas</h1>
 
-<% unless @magazine.magazine_pages.empty?%>
+<% unless @magazine.pages.empty?%>
   <table>
   <thead>
   <tr>
@@ -41,13 +41,13 @@
   </tr>
   </thead>
   <tbody>
-  <%=render :partial => "/magazine_pages/magazine_page", :collection => @magazine.magazine_pages %>
+  <%=render :partial => "/pages/page", :collection => @magazine.pages %>
   </tbody>
   </table>
 <%end%>
 
 
-<%= link_to "Add pages" , new_magazine_page_url(:magazine_id => @magazine.id) %> 
+<%= link_to "Add pages" , new_magazine_page_url(@magazine) %> 
   
 <%= link_to 'Edit', edit_magazine_path(@magazine) %> |
 <%= link_to 'Back', magazines_path %>
