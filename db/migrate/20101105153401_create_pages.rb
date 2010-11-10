@@ -1,6 +1,6 @@
-class CreateMagazinePages < ActiveRecord::Migration
+class CreatePages < ActiveRecord::Migration
   def self.up
-    create_table :magazine_pages do |t|
+    create_table :pages do |t|
       t.integer :magazine_id , :null => false
       t.integer :page_number  , :null => false
       t.timestamps :default => Time.now
@@ -10,13 +10,13 @@ class CreateMagazinePages < ActiveRecord::Migration
       t.datetime :image_updated_at           
     end
     
-    execute "alter table magazine_pages add constraint fk_magazine_pages 
+    execute "alter table pages add constraint fk_pages 
              foreign key (magazine_id) references magazines(id)"
     
   end
 
   def self.down
-    drop_table :magazine_pages
+    drop_table :pages
   end
 end
 
