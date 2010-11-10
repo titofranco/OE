@@ -1,4 +1,4 @@
-class MagazinePagesController < ApplicationController
+class PagesController < ApplicationController
   before_filter :find_magazine , :except => :destroy
   layout "magazines"
   
