@@ -1,0 +1,9 @@
+
+<tr>
+<td> <%=h page.page_number %> </td>
+<td>  <%= image_tag page.image.url(:thumb) %> </td>
+<td> 
+  <%= link_to "Edit", edit_page_path(@magazine, page)%>  
+  <%= link_to "Destroy", page, :method => :delete, :confirm => "Are you sure?"%>
+<td>
+</tr>

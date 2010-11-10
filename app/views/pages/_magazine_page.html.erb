@@ -1,9 +1,0 @@
-
-<tr>
-<td> <%=h magazine_page.page_number %> </td>
-<td>  <%= image_tag magazine_page.image.url(:thumb) %> </td>
-<td> 
-  <%= link_to "Edit", edit_magazine_page_path(@magazine, magazine_page)%>  
-  <%= link_to "Destroy", magazine_page, :method => :delete, :confirm => "Are you sure?"%>
-<td>
-</tr>
