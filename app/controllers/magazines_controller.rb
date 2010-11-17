@@ -86,17 +86,14 @@ class MagazinesController < ApplicationController
   end
   
   def show_magazine
-    @pages = Page.find_all_by_magazine_id(params[:id])
-    @magazine = Magazine.find(params[:id])    
-    respond_to do |format|
-      if @pages and @magazine
-        format.html
-        format.xml
-      end
-    end    
+    get_list_of_pages   
   end
   
   def j_page_flip
+    get_list_of_pages
+  end
+  
+  def get_list_of_pages
     @pages = Page.find_all_by_magazine_id(params[:id])
     @magazine = Magazine.find(params[:id])    
     respond_to do |format|
