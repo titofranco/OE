@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :find_magazine , :except => [:destroy]
+  #before_filter :find_magazine , :except => [:destroy]
   layout "magazines"
   
  # GET /pages
@@ -32,17 +32,26 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.xml
   def create
-    @page = Page.new(params[:page])
-    respond_to do |format|
-      if @page.save!
-        flash[:notice] = 'Page was successfully created.'
+   puts "HEEEEYYYYYYYYYY"
+   puts "#{params[:page]}"
+     @page = Page.new(params[:page])
+     respond_to do |format|
+       if @page.save!
+         flash[:notice] = 'Page was successfully created.'
         format.html { redirect_to magazine_url (@magazine) }
         format.xml  { render :xml => @page, :status => :created, :location => @page }
-      else
-        format.html { render :action => "add_pages" }
-        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
-      end
-    end
+        format.js do 
+          responds_to_parent do
+            render :update do |page|
+              page.insert_html :bottom, "ListOfPages", :partial => "page", :object => @page
+            end  
+          end
+        end           
+       else
+        format.html{ render :action => "add_pages" }
+        format.xml{ render :xml => @page.errors, :status => :unprocessable_entity }
+       end
+     end
   end
 
   # PUT /pages/1
