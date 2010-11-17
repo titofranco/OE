@@ -1,7 +1,5 @@
 class PagesController < ApplicationController
-  
- # before_filter :find_magazine , :except => [:create, :destroy, :new]
-  
+  before_filter :find_magazine , :except => [:destroy]
   layout "magazines"
   
  # GET /pages
@@ -11,7 +9,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml{ render :xml => @pages }
+      format.xml  { render :xml => @pages }
     end
   end
 
@@ -21,7 +19,8 @@ class PagesController < ApplicationController
   def new
     @page = Page.new
     respond_to do |format|
-     format.js
+      format.html # new.html.erb
+      format.xml  { render :xml => @page }
     end
   end
 
@@ -33,24 +32,15 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.xml
   def create
-    puts "HEEEEYYYYYYYYYY"
-    puts "#{params[:page]}"
     @page = Page.new(params[:page])
     respond_to do |format|
       if @page.save!
         flash[:notice] = 'Page was successfully created.'
-       # format.html{ redirect_to :controller=>"magazines", :action=>"index" }
-        format.js do 
-          responds_to_parent do
-            render :update do |page|
-              page.insert_html :bottom, "ListOfPages", :partial => "page", :object => @page
-            end  
-          end
-        end           
-       # format.xml { render :xml => @page, :status => :created, :location => @page }
+        format.html { redirect_to magazine_url (@magazine) }
+        format.xml  { render :xml => @page, :status => :created, :location => @page }
       else
-        format.html{ render :action => "add_pages" }
-        format.xml{ render :xml => @page.errors, :status => :unprocessable_entity }
+        format.html { render :action => "add_pages" }
+        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -63,11 +53,11 @@ class PagesController < ApplicationController
     respond_to do |format|
       if @page.update_attributes(params[:page])
         flash[:notice] = 'Page was successfully updated.'
-        format.html{ redirect_to magazine_url (@magazine) }
-        format.xml{ head :ok }
+        format.html { redirect_to magazine_url (@magazine) }
+        format.xml  { head :ok }
       else
-        format.html{ render :action => "edit" }
-        format.xml{ render :xml => @page.errors, :status => :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -79,8 +69,8 @@ class PagesController < ApplicationController
     @page.destroy
 
     respond_to do |format|
-      format.html{ redirect_to magazine_url(@page.magazine_id)}
-      format.xml{ head :ok }
+      format.html { redirect_to magazine_url(@page.magazine_id)}
+      format.xml  { head :ok }
     end
   end
   

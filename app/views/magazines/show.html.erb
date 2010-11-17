@@ -28,8 +28,8 @@
   <%= image_tag @magazine.cover.url(:thumb) %>
 </p>
 
-<div id="ListOfPages">
-<h1>List of Pages</h1>
+
+<h1>Lista de paginas</h1>
 
 <% unless @magazine.pages.empty?%>
   <table>
@@ -45,22 +45,9 @@
   </tbody>
   </table>
 <%end%>
-</div>
 
-<%form_for Page.new(:magazine => @magazine ), :html => {:multipart => true, :target => "upload_frame"}, :url => formatted_pages_path(:format => 'js') do |f|%>
-  <p>
-    <%= f.label :page_number%><br />
-    <%= f.text_field :page_number %>
-  </p>
-  
-  <%= f.hidden_field :magazine_id %>
-  </p>
-   <%= f.file_field :image %>
-  <p>
-    <%= f.submit 'create' %>
-  </p>
-<%end%>
-<iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+
+<%= link_to "Add pages" , new_magazine_page_url(@magazine) %> 
   
 <%= link_to 'Edit', edit_magazine_path(@magazine) %> |
 <%= link_to 'Back', magazines_path %>
