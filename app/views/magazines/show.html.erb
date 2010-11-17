@@ -46,8 +46,20 @@
   </table>
 <%end%>
 
-
-<%= link_to "Add pages" , new_magazine_page_url(@magazine) %> 
+<%form_for Page.new(:magazine => @magazine ), :html => {:multipart => true, :target => "upload_frame"}, :url => formatted_pages_path(:format => 'js') do |f|%>
+  <p>
+    <%= f.label :page_number%><br />
+    <%= f.text_field :page_number %>
+  </p>
+  
+  <%= f.hidden_field :magazine_id %>
+  </p>
+   <%= f.file_field :image %>
+  <p>
+    <%= f.submit 'create' %>
+  </p>
+<%end%>
+<iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
   
 <%= link_to 'Edit', edit_magazine_path(@magazine) %> |
 <%= link_to 'Back', magazines_path %>
