@@ -16,8 +16,22 @@ $(document).ready( function() {
       top: 30,
       left: 70
     });
-	
-	
+    
+  // jQuery("#new_page").submitWithAjax();
 });
 
 
+jQuery.fn.submitWithAjax = function() {
+  this.submit(function(){
+    //$.post(url, data, callback, dataType);  
+    $.post(this.action, $(this).serialize(),null,"script"); 
+    return false;
+  })
+  return this;
+};
+
+jQuery.ajaxSetup({
+  'beforeSend': function(xhr){
+    xhr.setRequestHeader("Accept", "text/javascript")
+  }
+})
