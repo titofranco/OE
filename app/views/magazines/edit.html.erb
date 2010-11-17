@@ -1,35 +1,6 @@
 <h1>Editing magazine</h1>
 
-<% form_for @magazine, :url => {:action => :update} ,:html => {:multipart => true} do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :number_of_pages %><br />
-    <%= f.text_field :number_of_pages %>
-  </p>
-  <p>
-    <%= f.label :publisher %><br />
-    <%= f.text_field :publisher %>
-  </p>
-  <p>
-    <%= f.label :tags %><br />
-    <%= f.text_field :tags %>
-  </p>
-  <p>
-    <%= f.label :release_date %><br />
-    <%= f.date_select :release_date %>
-  </p>
-  </p>
-   <%= f.file_field :cover %>
-  <p>  
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+<%= render(:partial=>'form') %>
 
 <%= link_to 'Show', @magazine %> |
 <%= link_to 'Back', magazines_path %>

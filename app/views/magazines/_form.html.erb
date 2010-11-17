@@ -1,0 +1,28 @@
+<% form_for @magazine , :html => {:multipart => true} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :number_of_pages %><br />
+    <%= f.text_field :number_of_pages %>
+  </p>
+  <p>
+    <%= f.label :publisher %><br />
+    <%= f.text_field :publisher %>
+  </p>
+  <p>
+    <%= f.label :tags %><br />
+    <%= f.text_field :tags %>
+  </p>
+  <p>
+    <%= f.label :release_date %><br />
+    <%= f.date_select :release_date %>
+  </p>
+   <%= f.file_field :cover %>
+  <p>
+    <%= f.submit 'Submit' %>
+  </p>
+<% end %>
