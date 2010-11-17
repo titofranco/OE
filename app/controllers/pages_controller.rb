@@ -9,7 +9,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @pages }
+      format.xml{ render :xml => @pages }
     end
   end
 
@@ -20,7 +20,7 @@ class PagesController < ApplicationController
     @page = Page.new
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @page }
+      format.xml{ render :xml => @page }
     end
   end
 
@@ -62,11 +62,11 @@ class PagesController < ApplicationController
     respond_to do |format|
       if @page.update_attributes(params[:page])
         flash[:notice] = 'Page was successfully updated.'
-        format.html { redirect_to magazine_url (@magazine) }
-        format.xml  { head :ok }
+        format.html{ redirect_to magazine_url (@magazine) }
+        format.xml{ head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
+        format.html{ render :action => "edit" }
+        format.xml{ render :xml => @page.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -78,8 +78,8 @@ class PagesController < ApplicationController
     @page.destroy
 
     respond_to do |format|
-      format.html { redirect_to magazine_url(@page.magazine_id)}
-      format.xml  { head :ok }
+      format.html{ redirect_to magazine_url(@page.magazine_id)}
+      format.xml{ head :ok }
     end
   end
   

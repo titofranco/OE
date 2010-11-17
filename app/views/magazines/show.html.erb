@@ -28,7 +28,7 @@
   <%= image_tag @magazine.cover.url(:thumb) %>
 </p>
 
-
+<div id= "ListOfPages">
 <h1>Lista de paginas</h1>
 
 <% unless @magazine.pages.empty?%>
@@ -45,7 +45,7 @@
   </tbody>
   </table>
 <%end%>
-
+</div>
 <%form_for Page.new(:magazine => @magazine ), :html => {:multipart => true, :target => "upload_frame"}, :url => formatted_pages_path(:format => 'js') do |f|%>
   <p>
     <%= f.label :page_number%><br />
