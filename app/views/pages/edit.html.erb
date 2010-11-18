@@ -1,17 +1,3 @@
 <h1>Editing magazine page</h1>
 
-<% form_for @page, :url => {:action => :update, :magazine_id=>@magazine.id} ,:html => {:multipart => true} do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :page_number%><br />
-    <%= f.text_field :page_number %>
-  </p>
-  
-  <%= f.hidden_field :magazine_id, :value => @magazine.id %>
-  </p>
-   <%= f.file_field :image %>
-  <p> 
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+<%=render(:partial => 'form')%>
