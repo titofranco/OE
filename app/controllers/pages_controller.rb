@@ -1,18 +1,7 @@
 class PagesController < ApplicationController
-  #before_filter :find_magazine , :except => [:destroy]
+  before_filter :find_magazine , :except => [:destroy, :create, :index]
   layout "magazines"
   
- # GET /pages
-  # GET /pages.xm 
-  def index
-    @pages = Page.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml{ render :xml => @pages }
-    end
-  end
-
 
   # GET /pages/new
   # GET /pages/new.xml
@@ -32,8 +21,6 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.xml
   def create
-   puts "HEEEEYYYYYYYYYY"
-   puts "#{params[:page]}"
      @page = Page.new(params[:page])
      respond_to do |format|
        if @page.save!
@@ -44,6 +31,7 @@ class PagesController < ApplicationController
           responds_to_parent do
             render :update do |page|
               page.insert_html :bottom, "ListOfPages", :partial => "page", :object => @page
+              page <<" $('#new_page')[0].reset()"
             end  
           end
         end           
@@ -86,7 +74,6 @@ class PagesController < ApplicationController
 
   private 
   def find_magazine
-    puts "recibi #{params[:magazine_id]}"
     @magazine_id = params[:magazine_id]
     return (redirect_to(magazines_url)) unless @magazine_id
     @magazine = Magazine.find(@magazine_id)
