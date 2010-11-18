@@ -1,20 +1,10 @@
 class PagesController < ApplicationController
-  before_filter :find_magazine , :except => [:destroy, :create, :index]
+
   layout "magazines"
   
-
-  # GET /pages/new
-  # GET /pages/new.xml
-  def new
-    @page = Page.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml{ render :xml => @page }
-    end
-  end
-
   # GET /pages/1/edit
   def edit
+    find_magazine
     @page = Page.find(params[:id])
   end
 
@@ -24,7 +14,7 @@ class PagesController < ApplicationController
      @page = Page.new(params[:page])
      respond_to do |format|
        if @page.save!
-         flash[:notice] = 'Page was successfully created.'
+        flash[:notice] = 'Page was successfully created.'
         format.html { redirect_to magazine_url (@magazine) }
         format.xml  { render :xml => @page, :status => :created, :location => @page }
         format.js do 
@@ -50,7 +40,7 @@ class PagesController < ApplicationController
     respond_to do |format|
       if @page.update_attributes(params[:page])
         flash[:notice] = 'Page was successfully updated.'
-        format.html{ redirect_to magazine_url (@magazine) }
+        format.html{ redirect_to magazine_url(@page.magazine.id) }
         format.xml{ head :ok }
       else
         format.html{ render :action => "edit" }
