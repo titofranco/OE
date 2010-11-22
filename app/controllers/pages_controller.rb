@@ -13,21 +13,24 @@ class PagesController < ApplicationController
   def create
      @page = Page.new(params[:page])
      respond_to do |format|
-       if @page.save!
+       if @page.save
         flash[:notice] = 'Page was successfully created.'
-        format.html { redirect_to magazine_url (@magazine) }
-        format.xml  { render :xml => @page, :status => :created, :location => @page }
+        format.html{ redirect_to magazine_url(@page.magazine.id) }
+        format.xml{ render :xml => @page, :status => :created, :location => @page }
         format.js do 
           responds_to_parent do
-            render :update do |page|
-              page.insert_html :bottom, "ListOfPages", :partial => "page", :object => @page
-              page <<" $('#new_page')[0].reset()"
-            end  
+            render (:template => "/pages/create.js.erb")
+            
           end
         end           
        else
         format.html{ render :action => "add_pages" }
         format.xml{ render :xml => @page.errors, :status => :unprocessable_entity }
+        format.js do
+          responds_to_parent do
+            render (:template => "/pages/errors.js.erb")
+          end
+        end
        end
      end
   end

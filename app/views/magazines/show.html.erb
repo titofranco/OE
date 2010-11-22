@@ -30,7 +30,7 @@
 
 <div id= "ListOfPages">
 <h1>Lista de paginas</h1>
-
+<div id= "bla"> </div>
 <% unless @magazine.pages.empty?%>
   <table>
   <thead>
@@ -46,7 +46,7 @@
   </table>
 <%end%>
 </div>
-<%form_for Page.new(:magazine => @magazine ), :html => {:multipart => true, :target => "upload_frame"}, :url => formatted_pages_path(:format => 'js') do |f|%>
+<%form_for Page.new(:magazine => @magazine ), :html => {:multipart => true, :target => "upload_frame"}, :url => pages_path(:format => 'js') do |f|%>
   <p>
     <%= f.label :page_number%><br />
     <%= f.text_field :page_number %>
