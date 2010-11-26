@@ -16,8 +16,16 @@ $(document).ready( function() {
       top: 30,
       left: 70
     });
-    
+    04465-35290
   // jQuery("#new_page").submitWithAjax();
+  
+  $('a.delete_page').live('click', function(){
+    console.debug("action" + this.href);
+    $.post(this.href, {_method: 'delete'},null, "script" );
+    //Implement what to hide
+    return false;
+  });
+  
 });
 
 
@@ -34,4 +42,4 @@ jQuery.ajaxSetup({
   'beforeSend': function(xhr){
     xhr.setRequestHeader("Accept", "text/javascript")
   }
-})
+});
