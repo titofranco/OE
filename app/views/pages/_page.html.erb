@@ -1,9 +1,12 @@
-
-<tr>
-<td> <%=h page.page_number %> </td>
-<td>  <%= image_tag page.image.url(:thumb) %> </td>
+<tr id = "page_<%=page.id%>" >
+<td> <%= h page.page_number %> </td>
+<td> <%= image_tag page.image.url(:thumb) %> </td>
 <td> 
   <%= link_to "Edit", edit_page_path(page, :magazine_id=>@magazine)%>  
-  <%= link_to "Destroy", page, :method => :delete, :confirm => "Are you sure?"%>
+  <%= link_to_remote 'Destroy',{ :method => :delete,
+      :url => {:controller=> "pages", :action => "destroy", :id => page.id},:class => "delete_page"},
+      :href => url_for ( :controller=> "pages", :action => "destroy", :id => page.id )
+  %>
 <td>
 </tr>
+

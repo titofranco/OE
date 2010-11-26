@@ -29,21 +29,21 @@
 </p>
 
 <div id= "ListOfPages">
-<h1>Lista de paginas</h1>
-<div id= "bla"> </div>
+<h1>List of Pages</h1>
+<div id= "error_messages"> </div>
 <% unless @magazine.pages.empty?%>
-  <table>
+<table>
   <thead>
-  <tr>
-  <th> Page Number </th>
-  <th> Image </th>
-  <th> Actions </th>
-  </tr>
+    <tr>
+      <th> Page Number </th>
+      <th> Image      </th>
+      <th> Actions    </th>
+    </tr>
   </thead>
   <tbody>
-  <%=render :partial => "/pages/page", :collection => @magazine.pages %>
+<%=render :partial => "/pages/page", :collection => @magazine.pages %>
   </tbody>
-  </table>
+</table>
 <%end%>
 </div>
 <%form_for Page.new(:magazine => @magazine ), :html => {:multipart => true, :target => "upload_frame"}, :url => pages_path(:format => 'js') do |f|%>
@@ -62,6 +62,6 @@
 <iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
   
 <%= link_to 'Edit', edit_magazine_path(@magazine) %> |
-<%= link_to 'Back', magazines_path %>
-<%= link_to 'Show magazine', :action => "show_magazine", :id => @magazine%>
+<%= link_to 'Back', magazines_path %> |
+<%= link_to 'Show magazine', :action => "show_magazine", :id => @magazine%> |
 <%= link_to 'jPageFlip', :action => "j_page_flip", :id => @magazine%>

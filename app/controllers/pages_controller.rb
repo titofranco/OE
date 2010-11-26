@@ -19,8 +19,7 @@ class PagesController < ApplicationController
         format.xml{ render :xml => @page, :status => :created, :location => @page }
         format.js do 
           responds_to_parent do
-            render (:template => "/pages/create.js.erb")
-            
+            render(:template => "/pages/create.js.erb")
           end
         end           
        else
@@ -28,7 +27,7 @@ class PagesController < ApplicationController
         format.xml{ render :xml => @page.errors, :status => :unprocessable_entity }
         format.js do
           responds_to_parent do
-            render (:template => "/pages/errors.js.erb")
+            render(:template => "/pages/errors.js.erb")
           end
         end
        end
@@ -55,12 +54,14 @@ class PagesController < ApplicationController
   # DELETE /pages/1
   # DELETE /pages/1.xml
   def destroy
+ 
     @page = Page.find(params[:id])
     @page.destroy
-
     respond_to do |format|
       format.html{ redirect_to magazine_url(@page.magazine_id)}
       format.xml{ head :ok }
+      format.js do 
+      end  
     end
   end
   
