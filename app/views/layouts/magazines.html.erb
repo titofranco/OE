@@ -10,6 +10,8 @@
 <body>
 <p style="color: green"><%= flash[:notice] %></p>
 <%=yield%>
-
+<% cache ("flickr_sidebar") do %>
+<%= render_flickr_sidebar_widget("56368477@N07") %>
+<%end%>
 </body>
 </html>
