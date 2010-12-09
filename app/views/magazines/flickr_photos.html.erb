@@ -1,0 +1,5 @@
+<%= link_to 'New magazine', new_magazine_path %>
+<% for photo in @photos %>
+    <a href="<%= photo.flickr.photos.getInfo(photo.id).urls.values %>" \
+        ><img src="<%= photo.url('s') %>" /></a>
+<% end %>
