@@ -10,5 +10,14 @@ class AlbumsController < ApplicationController
     @flickr = Flickr.new(flickr_cache,API_KEY,SHARED_SECRET)
     #user = flickr.people.findByUsername("titofranco")  
   end
+  
+  def covers
+    @photosets = @flickr.photosets.getList
+    @photos = Array.new
+    for photoset in @photosets do
+       @photos << @flickr.photosets.getPhotos(photoset.id.to_s,"1","1")
+    end
+    @photos.flatten!   
+  end
 
 end
