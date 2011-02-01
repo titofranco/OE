@@ -19,5 +19,10 @@ class AlbumsController < ApplicationController
     end
     @photos.flatten!   
   end
+ 
+  def show_photos
+    photoset_id = params[:id] 
+    @photos = @flickr.photosets.getPhotos(photoset_id.to_s)
+  end
 
 end
