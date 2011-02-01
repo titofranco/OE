@@ -1,0 +1,12 @@
+<table>
+<tbody>
+<tr>
+<% for photo in @photos %>
+  <td>
+    <a href="<%= photo.flickr.photos.getInfo(photo.id).urls.values %>" \
+        ><img src="<%= photo.url('s') %>" /></a>      
+  </td>      
+<% end %>
+</tr>
+</tbody>
+</table>
