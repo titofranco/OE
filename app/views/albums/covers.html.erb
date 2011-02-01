@@ -1,0 +1,16 @@
+<table>
+<tbody>
+  <tr>
+  <% for photo in @photos %> 
+     <td> <a href="<%= photo.flickr.photos.getInfo(photo.id).urls.values %>">
+     <img src="<%= photo.url('s') %>" /></a>
+     </td>             
+  <% end %>
+  </tr>
+  <tr>
+  <%for ps in @photosets%>
+    <td><%=link_to 'Show photos' , :action => "show_photos", :id => ps.id %> </td>    
+  <%end%>
+  </tr>
+</tbody>
+</table>
