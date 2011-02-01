@@ -1,7 +1,4 @@
 class MagazinesController < ApplicationController
-
-API_KEY = "891fffe180dca4fb47cca2b4a3bb6ec3"
-SHARED_SECRET = "98352d68fc4db45a" 
  
   layout "magazines"
   
@@ -9,18 +6,12 @@ SHARED_SECRET = "98352d68fc4db45a"
   # GET /magazines.xml
   def index
     @magazines = Magazine.all
-    flickr_photos
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @magazines }
     end
   end
-  
-  def flickr_photos
-    flickr_cache = File.join(RAILS_ROOT, 'config', 'flickr.cache')
-    flickr = Flickr.new(flickr_cache,API_KEY,SHARED_SECRET) 
-    @photos = flickr.people.getPublicPhotos(flickr.people.findByUsername("titofranco")) 
-  end
+    
   # GET /magazines/1
   # GET /magazines/1.xml
   def show
@@ -31,7 +22,7 @@ SHARED_SECRET = "98352d68fc4db45a"
       format.xml  { render :xml => @magazine }
     end
   end
-
+  
   # GET /magazines/new
   # GET /magazines/new.xml
   def new
