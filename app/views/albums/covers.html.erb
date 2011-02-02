@@ -1,16 +1,16 @@
+<%cache do%>
 <table>
 <tbody>
   <tr>
-  <% for photo in @photos %> 
-     <td> <a href="<%= photo.flickr.photos.getInfo(photo.id).urls.values %>">
-     <img src="<%= photo.url('s') %>" /></a>
-     </td>             
+  <% for ps in @photosets %> 
+     <td> <%=link_to( image_tag("/system/flickr_ps_cache/small/" + ps.photoset_id + ".jpg", :alt => ps.title), 
+     ps.url)%>
+     </td>
+     <tr>
+     <td> <%= link_to 'Show photos', :action => 'show_photos', :id => ps.photoset_id %> </td>
+     </tr>             
   <% end %>
-  </tr>
-  <tr>
-  <%for ps in @photosets%>
-    <td><%=link_to 'Show photos' , :action => "show_photos", :id => ps.id %> </td>    
-  <%end%>
   </tr>
 </tbody>
 </table>
+<%end%>
