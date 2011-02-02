@@ -731,39 +731,28 @@ class Flickr::PhotoSet
 
 	def self.from_xml(xml,flickr=nil)
 		att = xml.attributes
-		#puts "WHAT IS att #{att.inspect} "
-		#puts att
 		psid = att['id']
-		#puts "psid #{psid}"
 
 		set = flickr.photoset_cache_lookup(psid) if flickr
-		set ||= Flickr::PhotoSet.new(psid,flickr)
-		#puts "la class del set #{set.class}"
+		set = Flickr::PhotoSet.new(psid,flickr)
 		set.secret = att['secret']
 		set.owner = att['owner']
 		set.url = att['url']
 		set.server = att['server'].to_i
 		set.primary_id = att['primary'].to_i
 		set.photo_count = att['photos'].to_i
+		puts "QUE FUE EL PHOTO COUNT #{set.photo_count}"
 		set.title = xml.elements['title'].text if xml.elements['title']
 		set.description = xml.elements['description'].text if
 		xml.elements['description']
-		#puts "un ejemplo de un atributo de set #{set.primary_id}"
-		#puts "set.photos #{set.photo_count}"
-		#puts "ANTES DEL ELEMENTS PHOTO EL SET #{set.inspect}"
 		if xml.elements['photo']
-		 #puts "pase por aqui"
 			set = []
 			xml.elements.each('photo') do |el|
 				set << Flickr::Photo.from_xml(el,flickr)
 			end
 		end
-    
-    #puts "ESTO ES LO QUE VA DE SET #{set}"
-    
+       
 		flickr.photoset_cache_store(set) if flickr
-		
-		#puts "ESTO ES LO QUE QUEDO DESPUYES DEL IF #{set.server}"
 		
 		return set
 	end
