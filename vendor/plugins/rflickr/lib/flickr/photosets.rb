@@ -90,7 +90,7 @@ class Flickr::PhotoSets < Flickr::APIBase
 		  #puts "The element #{el}"
 			list << Flickr::PhotoSet.from_xml(el,@flickr)		
 		end
-	  #puts "YA AL FINAL list #{list.inspect}"
+	  #puts "list #{list.inspect}"
 		return list.flatten
 	end
 
@@ -109,12 +109,12 @@ class Flickr::PhotoSets < Flickr::APIBase
 		args['per_page'] = per_page if per_page
 		args['page'] = page if page
 		res = @flickr.call_method('flickr.photosets.getPhotos',args)
-		puts "Esta es la respuesta de GetPhotos #{res}"
+		puts "GetPhotos response in XML #{res}"
 		return Flickr::PhotoSet.from_xml(res.root,@flickr)
 	end
 
 	def getInfo(photoset)
-		photoset = photoset.id if photoset.class == Flickr::PhotoSet
+		#photoset = photoset.id if photoset.class == Flickr::PhotoSet
 		res = @flickr.call_method('flickr.photosets.getInfo',
 			'photoset_id' => photoset)
 		return Flickr::PhotoSet.from_xml(res.root,@flickr)
