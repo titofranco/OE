@@ -741,7 +741,6 @@ class Flickr::PhotoSet
 		set.server = att['server'].to_i
 		set.primary_id = att['primary'].to_i
 		set.photo_count = att['photos'].to_i
-		puts "QUE FUE EL PHOTO COUNT #{set.photo_count}"
 		set.title = xml.elements['title'].text if xml.elements['title']
 		set.description = xml.elements['description'].text if
 		xml.elements['description']

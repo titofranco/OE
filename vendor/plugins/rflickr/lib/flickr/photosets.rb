@@ -109,7 +109,7 @@ class Flickr::PhotoSets < Flickr::APIBase
 		args['per_page'] = per_page if per_page
 		args['page'] = page if page
 		res = @flickr.call_method('flickr.photosets.getPhotos',args)
-		puts "GetPhotos response in XML #{res}"
+		#puts "GetPhotos response in XML #{res}"
 		return Flickr::PhotoSet.from_xml(res.root,@flickr)
 	end
 
