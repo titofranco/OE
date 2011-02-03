@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110202160339) do
+ActiveRecord::Schema.define(:version => 20110203150823) do
 
   create_table "magazines", :force => true do |t|
     t.string   "title",                                                 :null => false
@@ -37,6 +37,19 @@ ActiveRecord::Schema.define(:version => 20110202160339) do
   end
 
   add_index "pages", ["magazine_id"], :name => "fk_pages"
+
+  create_table "photos", :force => true do |t|
+    t.string   "photoset_id", :limit => 25
+    t.string   "photo_id",    :limit => 25
+    t.string   "title",       :limit => 250
+    t.text     "description"
+    t.string   "url",         :limit => 250
+    t.datetime "created_at",                 :default => '2011-02-03 14:24:54'
+    t.datetime "updated_at",                 :default => '2011-02-03 14:24:54'
+  end
+
+  add_index "photos", ["photo_id"], :name => "index_photos_on_photo_id"
+  add_index "photos", ["photoset_id"], :name => "fk_photos"
 
   create_table "photosets", :force => true do |t|
     t.string   "photoset_id", :limit => 25
