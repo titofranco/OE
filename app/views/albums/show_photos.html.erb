@@ -1,12 +1,14 @@
+<%cache do%>
 <table>
 <tbody>
 <tr>
 <% for photo in @photos %>
   <td>
-    <a href="<%= photo.flickr.photos.getInfo(photo.id).urls.values %>" \
-        ><img src="<%= photo.url('s') %>" /></a>      
+  <%=link_to (image_tag("/system/flickr_photos_cache/small/" + photo.photo_id + ".jpg", :alt=>photo.title),
+  photo.url)%>   
   </td>      
 <% end %>
 </tr>
 </tbody>
 </table>
+<%end%>
