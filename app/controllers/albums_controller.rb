@@ -19,8 +19,11 @@ require 'open-uri'
   end
  
   def show_photos
-    photoset_id = params[:id] 
-    @photos = @flickr.photosets.getPhotos(photoset_id.to_s)
+    photoset_id = params[:id]
+    unless read_fragment(:action =>'show_photos')
+      check_photo_cache(photoset_id)
+      @photos = Photo.find(:all, :conditions => ["photoset_id = ?",photoset_id])
+    end
   end
 
   private
@@ -47,13 +50,41 @@ require 'open-uri'
           new_photoset.title = @photosets[i].title
           new_photoset.description = @photosets[i].description
           new_photoset.url = @covers[i].flickr.photos.getInfo(@covers[i].id).urls.values[0]
-          puts "COMO QUEDO ESTO: #{new_photoset.inspect}"
           new_photoset.save 
           open(File.expand_path("#{RAILS_ROOT}/public/system/flickr_ps_cache/small/" + new_photoset.photoset_id  + ".jpg"),"w").write(open(@covers[i].url('s')).read)
           open(File.expand_path("#{RAILS_ROOT}/public/system/flickr_ps_cache/large/" + new_photoset.photoset_id + ".jpg"),"w").write(open(@covers[i].url).read)
         end            
       end  
     end
+  end
+  
+  def check_photo_cache(photoset_id)
+    
+    if ENV['RAILS_ENV'] == 'production'
+      authenticate
+      @db_photos = Array.new
+      @photos = @flickr.photosets.getPhotos(photoset_id.to_s)
+      
+      Photo.find(:all, :conditions => ["photoset_id = ?", photoset_id]).each {|p| @db_photos.push(p.photo_id)} 
+      
+      for photo in @photos 
+        
+        if !@db_photos.include?(photo.id)
+          new_photo = Photo.new
+          new_photo.photoset_id = photoset_id
+          new_photo.photo_id = photo.id
+          new_photo.title = photo.title
+          new_photo.description = photo.flickr.photos.getInfo(photo.id).description
+          new_photo.url = photo.flickr.photos.getInfo(photo.id).urls.values[0]
+          new_photo.save
+          
+          open(File.expand_path("#{RAILS_ROOT}/public/system/flickr_photos_cache/small/" + new_photo.photo_id + ".jpg"),"w").write(open(photo.url('s')).read)
+          open(File.expand_path("#{RAILS_ROOT}/public/system/flickr_photos_cache/large/" + new_photo.photo_id + ".jpg"),"w").write(open(photo.url).read)          
+          
+        end
+      end
+    end
+         
   end
   
 end
