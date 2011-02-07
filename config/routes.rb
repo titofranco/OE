@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
+  map.connect "/albums", :controller => "albums", :action => "covers", :conditions => { :method => :get}
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
