@@ -4,12 +4,6 @@ require 'open-uri'
   SHARED_SECRET = "98352d68fc4db45a" 
   
   before_filter :authenticate
-
-  def authenticate
-    flickr_cache = File.join(RAILS_ROOT, 'config', 'flickr.cache')
-    @flickr = Flickr.new(flickr_cache,API_KEY,SHARED_SECRET)
-    #user = flickr.people.findByUsername("titofranco")  
-  end
   
   def covers
     unless read_fragment(:action=>'covers')
@@ -30,7 +24,7 @@ require 'open-uri'
   
   def check_ps_cache
     #caching usually is for production, but meanwhile you can work on development mode
-    if ENV['RAILS_ENV'] == 'production'
+    if ENV['RAILS_ENV'] == 'development'
       authenticate
       @photosets = @flickr.photosets.getList 
       @covers = Array.new
@@ -60,7 +54,7 @@ require 'open-uri'
   
   def check_photo_cache(photoset_id)
     
-    if ENV['RAILS_ENV'] == 'production'
+    if ENV['RAILS_ENV'] == 'development'
       authenticate
       @db_photos = Array.new
       @photos = @flickr.photosets.getPhotos(photoset_id.to_s)
@@ -85,6 +79,14 @@ require 'open-uri'
       end
     end
          
+  end
+  
+    
+  private
+  def authenticate
+    flickr_cache = File.join(RAILS_ROOT, 'config', 'flickr.cache')
+    @flickr = Flickr.new(flickr_cache,API_KEY,SHARED_SECRET)
+    #user = flickr.people.findByUsername("titofranco")  
   end
   
 end
