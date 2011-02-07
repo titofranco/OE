@@ -4,8 +4,8 @@
 <tr>
 <% for photo in @photos %>
   <td>
-  <%=link_to (image_tag("/system/flickr_photos_cache/small/" + photo.photo_id + ".jpg", :alt=>photo.title),
-  photo.url)%>   
+  <%=link_to (image_tag("/system/flickr_photos_cache/small/" + photo.photo_id + ".jpg", :alt =>photo.title), 
+  "/system/flickr_photos_cache/large/" + photo.photo_id + ".jpg",:rel => 'flickr_photos')%>   
   </td>      
 <% end %>
 </tr>
