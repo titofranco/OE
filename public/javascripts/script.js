@@ -26,6 +26,16 @@ $(document).ready( function() {
     return false;
   });
   
+  $('a[rel="flickr_photos"]').colorbox({
+    transition: 'fade',
+    speed: 500, //specifies the duration of the fade
+    current: "{current} of {total} photos",
+    opacity: 0.5,
+    slideshow: true,
+    slideshowSpeed: 4500
+
+  });
+  
 });
 
 
