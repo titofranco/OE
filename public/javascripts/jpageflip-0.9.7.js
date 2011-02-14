@@ -124,7 +124,7 @@
           flipImage[i] = this;
         });
         flipImage[flipImage.length] = new Image();
-        flipImage[flipImage.length-1]['src'] = 'images/clearpixel.gif';
+        flipImage[flipImage.length-1]['src'] = '/images/clearpixel.gif';
         
         var help1 = 0;
         var help2 = 0;
