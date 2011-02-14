@@ -16,7 +16,7 @@ class MagazinesController < ApplicationController
   # GET /magazines/1.xml
   def show
     @magazine = Magazine.find(params[:id])
-
+    @pages = Page.find_all_by_magazine_id(params[:id], :order => "page_number ASC")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @magazine }
@@ -86,7 +86,7 @@ class MagazinesController < ApplicationController
   
   def show_magazine
     @pages = Page.find_all_by_magazine_id(params[:id])
-    @magazine = Magazine.find(params[:id])    
+    @magazine = Magazine.find(params[:id])   
     respond_to do |format|
       if @pages and @magazine
         format.html
@@ -96,7 +96,7 @@ class MagazinesController < ApplicationController
   end
   
   def j_page_flip
-    @pages = Page.find_all_by_magazine_id(params[:id])
+    @pages = Page.find_all_by_magazine_id(params[:id], :order=> "page_number asc")
     @magazine = Magazine.find(params[:id])    
     respond_to do |format|
       if @pages and @magazine

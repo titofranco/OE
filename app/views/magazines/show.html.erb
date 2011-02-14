@@ -31,7 +31,7 @@
 <div id= "ListOfPages">
 <h1>List of Pages</h1>
 <div id= "error_messages"> </div>
-<% unless @magazine.pages.empty?%>
+<% unless @pages.empty?%>
 <table>
   <thead>
     <tr>
@@ -41,7 +41,7 @@
     </tr>
   </thead>
   <tbody>
-<%=render :partial => "/pages/page", :collection => @magazine.pages %>
+<%=render :partial => "/pages/page", :collection => @pages %>
   </tbody>
 </table>
 <%end%>
